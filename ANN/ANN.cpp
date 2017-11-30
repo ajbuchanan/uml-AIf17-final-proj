@@ -129,6 +129,7 @@ std::string ANN::evaluate_neural_net()
 	double value = 0.0;
 	int index = 0, max_index = 0;
 
+	
 
 	return std::string();
 }

@@ -6,31 +6,53 @@
 #ifndef ANN_HPP
 #define ANN_HPP
 
-#include <map>
-#include <vector>
+#include <map> // std::map
+#include <memory> // std::shared_ptr
+#include <vector> // std::vector
+
+// This enumerated type specifies to the neurons which transfer function to utilize
+typedef enum Activation_Functions { NO_ACTIVIATION_FUNCTION, STEP, SIGMOID } ActivationFunctions;
+
+/*
+	A neuron is a base component of an artificial neural network.
+*/
+class Neuron
+{
+	public:
+	Neuron();
+	Neuron(double new_value) { m_value = new_value; }
+
+	protected:
+	double m_value;
+};
 
 /*  
-    
+	Neurons in the hidden layer work as filters for the neural network being
+	able to take in all of the input vectors of the previous layer (could be
+	the input layer or another layer in the hidden layer) and output whether
+	the inputs compared to a bias are significant enough for the neural net
+	to factor into its decision. Neurons' outputs are simply a number, in this
+	implementation, a double precision floating point number.
 */
-class HiddenLayerNeuron
+class HiddenLayerNeuron : protected Neuron
 {
 public:
 	HiddenLayerNeuron();
 
 	// accessor functions
 	double get_input_vector(int index) { return m_input_vectors.at(index); }
-	double get_input_weight() { return m_input_weight; }
+	double get_input_weight(int index) { return m_input_weight.at(index); }
 	double get_bias() { return m_bias; }
 
 private:
-	/*
+	/*------------------------------------------
 	Calculates u = (summation of wi * xi + bias)
-	*/
+	------------------------------------------*/
 	double summation_weight_input_vector();
 
 	// Transfer Functions
 public:
-	/*---------------------------------------------------------
+	/*---------------------------------------------------------------------
 	Perceptron Implementation
 
 	Implements the piecewise function
@@ -38,7 +60,7 @@ public:
 	yk = { 1 if u >= 0, 0 if u < 0 }, where u = summation of wi * xi - bias
 
 	Returns true if m_summation >= 0 and returns false if m_summation < 0
-	----------------------------------------------------------*/
+	---------------------------------------------------------------------*/
 	bool step_function();
 
 	/*---------------------------------------------------------------------
@@ -58,17 +80,13 @@ private:
 	// or the outputs of the neurons of the previous layers
 	std::vector<double> m_input_vectors;
 	// should not be used if Neuron is in input layer
-	double m_input_weight;
-	// bias value of the neuron (optional), which has values less
-	// than the bias ignored by the neural network
+	std::vector<double> m_input_weight;
+	// bias value of the neuron (optional-use with perceptron), which has values less
+	// than the bias are ignored by the neural network
 	double m_bias;
 
 	// summation calculated in summation_weight_input_vector()
 	double m_summation;
-	// value stored by the neuron after calculating the neuron's 
-	// selected activation function * summation
-	// this value will be passed to the next layer of neurons as new inputs
-	double m_value;
 
 	// does not allow transfer functions to work until summation
 	// has been calculated
@@ -76,7 +94,7 @@ private:
 	bool summation_complete;
 };
 
-class InputLayerNeuron
+class InputLayerNeuron : protected Neuron
 {
 public:
 	InputLayerNeuron();
@@ -94,12 +112,9 @@ public:
 
 	// overloaded assignment operator
 	void operator=(const InputLayerNeuron& neuron) { m_value = neuron.m_value; }
-
-private:
-	double m_value;
 };
 
-class OutputLayerNeuron
+class OutputLayerNeuron : protected Neuron
 {
 public:
 	OutputLayerNeuron();
@@ -122,7 +137,6 @@ public:
 	void operator=(const OutputLayerNeuron& neuron) { m_value = neuron.m_value; m_value_represents = neuron.m_value_represents; }
 
 private:
-	double m_value;
 	std::string m_value_represents;
 };
 
@@ -175,6 +189,38 @@ private:
 
 	// holds the neurons of the output layer
 	std::vector<OutputLayerNeuron> m_output_layer;
+};
+
+typedef enum ANN_Layer { UNSET_ANN_LAYER, INPUT_LAYER, HIDDEN_LAYER, OUTPUT_LAYER } ANN_layer;
+
+class NeuronFactory
+{
+	public:
+	// gain an instance of a static NeuronFactory (Version C++11) as a 
+	// shared pointer to the NeuronFactory instance
+	static std::shared_ptr<NeuronFactory> get_instance() {
+		static std::shared_ptr<NeuronFactory> instance(new NeuronFactory);
+		return instance;
+	}
+
+	// overloaded function for usage with pre C++11 or non-shared pointer
+	// interfaces
+	static NeuronFactory* get_instance_ptr() {
+		static NeuronFactory* instance = new NeuronFactory();
+		return instance;
+	}
+
+	private:
+	// private default constructor because singleton
+	// EMPTY default constructor
+	NeuronFactory() { }
+	
+	/*---------------------------------------------------------------------------------------------------------------
+	This function takes in a vector of doubles to be stored in the neuron layer and an enumerated type corresponding 
+	to the layer of neurons that is being created. This function creates a vector of shared pointers to neurons (of
+	the type specified by the enumerated type)
+	----------------------------------------------------------------------------------------------------------------*/
+	std::vector<std::shared_ptr<Neuron>> generate_layer(std::vector<double> input_vectors, ANN_layer chosen_layer); 
 };
 
 #endif // ANN_HPP
