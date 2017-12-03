@@ -7,6 +7,5 @@
 
 int main()
 {
-    ANN neural_net;
-    NeuronFactory* factory = NeuronFactory::get_instance_ptr();
+    
 }
