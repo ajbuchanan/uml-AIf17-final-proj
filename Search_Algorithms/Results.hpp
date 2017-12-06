@@ -1,13 +1,9 @@
+#ifndef RESULTS_HPP
+#define RESULTS_HPP
+
 #include <deque>
-#include <math.h>
-#include <string>
-#include <cstdlib>
-#include <fstream>
-#include <iostream>
 
 #include "Node.hpp"
-
-using namespace std;
 
 typedef enum searchType {AStar, BFS, DFS, UCS} SearchType;
 
@@ -17,13 +13,15 @@ private:
     int mTotalMoves;
     int mNumExpanded;
     SearchType mAlgorithUsed;
-    deque<Node*> mPath;
+    std::deque<Node*> mPath;
 
 public:
-    Results(int, int, std::vector<Node>);
+    Results(int moves, int expanded, std::deque<Node*> path);
 
     int getTotalMoves();
     int getNumExpanded();
     SearchType getAlgorithmUsed();
-    deque<Node*> getPath();
+    std::deque<Node*> getPath();
 };
+
+#endif

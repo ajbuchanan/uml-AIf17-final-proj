@@ -10,7 +10,7 @@
 
 using namespace std;
 
-Searcher::Search(std::string file, bool debug):mNumMoves(0), mMaxQueue(0)
+Searcher::Searcher(std::string file, bool debug) : mNumMoves(0), mMaxQueue(0)
 {
     mDebugMode = debug;
     ifstream mazeFile;
@@ -57,7 +57,7 @@ int Searcher::ManhattanDistance(int row, int col)
 
 void Searcher::Search()
 {
-    Node startNode = new Node(mStartRow, mStartCol, 0, 0);
+    Node* startNode = new Node(mStartRow, mStartCol, 0, 0);
     if(BFS)
     {
         mFrontier.push_back(startNode);
@@ -79,7 +79,7 @@ void Searcher::Search()
             cost = 1;
         }
 
-        mFrontier.push_back(new Node(mStartRow, mStartCol, 0, cost, 0));
+        mFrontier.push_back(new Node(mStartRow, mStartCol, 0, startNode ,cost));
     }
 
     mMaxQueue = 1;
@@ -216,7 +216,7 @@ void Searcher::GenericSearch(int row, int col)
 
 void Searcher::HeuristicSearch(int row, int col, int depth, Node* parent)
 {
-    int heuristic = -1
+    int heuristic = -1;
     if(AS)
     {
         heuristic = ManhattanDistance(row, col) + depth;
@@ -255,7 +255,7 @@ void Searcher::HeuristicSearch(int row, int col, int depth, Node* parent)
 
         if(!insertSuccess)
         {
-            mFrontier.push_back(new Node(row, col, depth, parent, heuristic))
+            mFrontier.push_back(new Node(row, col, depth, parent, heuristic));
         }
     }
 }
@@ -299,7 +299,7 @@ void Searcher::Print()
                 bool onPath = false;
                 for(int x = 0; x < mPath.size(); x++)
                 {
-                    if(mPath[x]->getRow() == i && mPath[x]->getCol() == j)
+                    if(mPath[x]->getRow() == i && mPath[x]->getColumn() == j)
                     {
                         onPath = true;
                     }
@@ -319,9 +319,9 @@ void Searcher::Print()
     }
 
     cout << "\nNode Order: " << endl;
-	for ( int k = 0; k < path.size(); k++ )
+	for ( int k = 0; k < mPath.size(); k++ )
     {
-         cout << "(" << ( path[k]->getCol() ) << "," <<  BOARDSIZE - ( path[k]->getRow() ) - 1 << ")";
+         cout << "(" << ( mPath[k]->getColumn() ) << "," <<  BOARDSIZE - ( mPath[k]->getRow() ) - 1 << ")";
 
          if( k < path.size() - 1 )
          {
@@ -331,7 +331,7 @@ void Searcher::Print()
 
     cout << "\n\n";
 
-    cout << "Total Length: " << path.size() << "\n";
+    cout << "Total Length: " << mPath.size() << "\n";
     cout << "Total Number of Moves: " << mNumMoves-1 << "\n";
     cout << "Max Size of Frontier: " << mMaxQueue << "\n";
     cout << "Final Frontier Size: " << mFrontier.size() << "\n";
@@ -357,7 +357,7 @@ void Searcher::CleanUp()
 
 Results* Searcher::GenerateResults()
 {
-    return new Results(mNumMoves, mVisited.size(), path);
+    return new Results(mNumMoves, mVisited.size(), mPath);
 }
 
 void Searcher::AStarSearch()
@@ -415,8 +415,8 @@ int main()
 {
     Searcher* s = new Searcher();
 
-    s.AStarSearch();
-    s.BreadthFirstSearch();
-    s.DepthFirstSearch();
-    s.UniformCostSearch();
+    s->AStarSearch();
+    s->BreadthFirstSearch();
+    s->DepthFirstSearch();
+    s->UniformCostSearch();
 }

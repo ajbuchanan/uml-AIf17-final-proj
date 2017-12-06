@@ -1,14 +1,10 @@
+#ifndef SEARCHER_HPP
+#define SEARCHER_HPP
+
 #include <deque>
-#include <math.h>
-#include <string>
-#include <cstdlib>
-#include <fstream>
-#include <iostream>
 
 #include "Node.hpp"
 #include "Results.hpp"
-
-using namespace std;
 
 //Size of an edge of a maze N x N
 static const int BOARDSIZE = 10;
@@ -47,9 +43,9 @@ private:
     //If set to true will print to console the results of the searches
     bool mDebugMode;
 
-    deque<Node*> mFrontier;
-    deque<Node*> mVisited;
-    deque<Node*> mPath;
+    std::deque<Node*> mFrontier;
+    std::deque<Node*> mVisited;
+    std::deque<Node*> mPath;
 
     //Private funcs
     void        Search();
@@ -57,6 +53,8 @@ private:
     void        HeuristicSearch(int, int, int, Node*);
     void        GeneratePath();
     Results*    GenerateResults();
+
+    int ManhattanDistance(int row, int col);
 
 public:
     Searcher(std::string file = "TestProblems/template.map", bool debug = false);
@@ -71,3 +69,5 @@ public:
     void        CleanUp();
     void        SetDebugMode(bool); //turns on or off debug mode
 };
+
+#endif

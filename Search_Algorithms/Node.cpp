@@ -11,7 +11,7 @@ Node::Node(int row, int col, int depth, Node* parent, int cost)
 
 Node::~Node()
 {
-    delete mParent;    
+    delete mParent;
 }
 
 int Node::getRow()

@@ -1,8 +1,8 @@
 #include "Results.hpp"
 
-Results::Results(int moves, int expanded, std::vector<Node*> path)
+Results::Results(int moves, int expanded, std::deque<Node*> path)
 {
-    this->mNumMoves = moves;
+    this->mTotalMoves = moves;
     this->mNumExpanded = expanded;
     this->mPath = path;
 }
@@ -22,7 +22,7 @@ SearchType Results::getAlgorithmUsed()
     return mAlgorithUsed;
 }
 
-deque<Node*> Results::getPath()
+std::deque<Node*> Results::getPath()
 {
     return mPath;
 }
