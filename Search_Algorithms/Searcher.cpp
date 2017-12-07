@@ -1,6 +1,5 @@
 #include <deque>
 #include <math.h>
-#include <string>
 #include <cstdlib>
 #include <fstream>
 #include <iostream>

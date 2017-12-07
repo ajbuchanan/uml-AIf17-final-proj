@@ -1,4 +1,5 @@
 #include <deque>
+#include <climits>
 #include <math.h>
 #include <string>
 #include <cstdlib>
@@ -7,6 +8,7 @@
 
 #include "Node.hpp"
 #include "Results.hpp"
+#include "Graph.hpp"
 
 using namespace std;
 
@@ -50,6 +52,8 @@ private:
     deque<Node*> mFrontier;
     deque<Node*> mVisited;
     deque<Node*> mPath;
+
+    Graph mGraph;
 
     //Private funcs
     void        Search();
