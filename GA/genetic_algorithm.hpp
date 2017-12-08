@@ -4,11 +4,12 @@
 #ifndef GENETIC_ALGORITHM_HPP
 #define GENETIC_ALGORITHM_HPP
 
-#include <map>
-#include <memory>
-#include <vector>
+#include <map> // std::map
+#include <memory> // std::shared_ptr
+#include <vector> // std::vector
 
 #include "Search_Algorithms/Results.hpp"
+#include "expected_data.hpp"
 
 class GeneticAlgorithmBool
 {
@@ -45,7 +46,8 @@ class GeneticAlgorithmBool
     
     /*-----------------------------------------------------------------
         This function determines which member of the population is the
-        fittest member of the generation which will survive 
+        fittest member of the generation which will survive and 
+        reproduce for the next generation. 
     -----------------------------------------------------------------*/
     void fitness_function();
     
@@ -58,11 +60,6 @@ class GeneticAlgorithmBool
     
     -----------------------------------------------------------------*/
     void mutation();
-
-    /*-----------------------------------------------------------------
-    
-    -----------------------------------------------------------------*/
-    unsigned int generate_new_population();
 
     std::map<int, std::vector<bool>> m_generation;
 

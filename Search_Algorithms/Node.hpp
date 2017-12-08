@@ -8,7 +8,6 @@ private:
     int mCol;
     int mDepth;
     int mCost;
-
     Node* mParent;
 
 public:

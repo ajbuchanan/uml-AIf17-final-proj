@@ -17,7 +17,7 @@ private:
 
 public:
     Results(int moves, int expanded, std::deque<Node*> path);
-
+    
     int getTotalMoves();
     int getNumExpanded();
     SearchType getAlgorithmUsed();

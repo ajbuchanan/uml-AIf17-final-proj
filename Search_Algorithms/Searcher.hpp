@@ -22,7 +22,7 @@ static const char WALL   = 'x'; //Obstacle
 static const char OPEN   = 'o'; //Node that has been added to queue but not expanded
 static const char EXP    = 'e'; //Node that has been expanded (visited)
 static const char GOAL   = 'g'; //Goal State
-
+    
 class Searcher
 {
 private:
@@ -57,7 +57,7 @@ private:
     int ManhattanDistance(int row, int col);
 
 public:
-    Searcher(std::string file = "TestProblems/template.map", bool debug = false);
+    Searcher(std::string file, bool debug = false);
 
     void        AStarSearch();
     void        BreadthFirstSearch();

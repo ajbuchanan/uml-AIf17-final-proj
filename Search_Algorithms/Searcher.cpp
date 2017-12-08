@@ -57,7 +57,7 @@ int Searcher::ManhattanDistance(int row, int col)
 
 void Searcher::Search()
 {
-    Node* startNode = new Node(mStartRow, mStartCol, 0, 0);
+    Node* startNode = new Node(mStartRow, mStartCol, 0, NULL, 0);
     if(BFS)
     {
         mFrontier.push_back(startNode);
@@ -142,11 +142,11 @@ void Searcher::GenericSearch(int row, int col)
 
         if(BFS)
         {
-            mFrontier.push_back(new Node(row, col-1, depth, parent));
+            mFrontier.push_back(new Node(row, col-1, depth, parent, 0));
         }
         else if(DFS)
         {
-            mFrontier.push_front(new Node(row, col-1, depth, parent));
+            mFrontier.push_front(new Node(row, col-1, depth, parent, 0));
         }
         else if(AS || UCS)
         {
@@ -161,11 +161,11 @@ void Searcher::GenericSearch(int row, int col)
 
         if(BFS)
         {
-            mFrontier.push_back(new Node(row-1, col, depth, parent));
+            mFrontier.push_back(new Node(row-1, col, depth, parent, 0));
         }
         else if(DFS)
         {
-            mFrontier.push_front(new Node(row-1, col, depth, parent));
+            mFrontier.push_front(new Node(row-1, col, depth, parent, 0));
         }
         else if(AS || UCS)
         {
@@ -180,11 +180,11 @@ void Searcher::GenericSearch(int row, int col)
 
         if(BFS)
         {
-            mFrontier.push_back(new Node(row, col+1, depth, parent));
+            mFrontier.push_back(new Node(row, col+1, depth, parent, 0));
         }
         else if(DFS)
         {
-            mFrontier.push_front(new Node(row, col+1, depth, parent));
+            mFrontier.push_front(new Node(row, col+1, depth, parent, 0));
         }
         else if(AS || UCS)
         {
@@ -199,11 +199,11 @@ void Searcher::GenericSearch(int row, int col)
 
         if(BFS)
         {
-            mFrontier.push_back(new Node(row+1, col, depth, parent));
+            mFrontier.push_back(new Node(row+1, col, depth, parent, 0));
         }
         else if(DFS)
         {
-            mFrontier.push_front(new Node(row+1, col, depth, parent));
+            mFrontier.push_front(new Node(row+1, col, depth, parent, 0));
         }
         else if(AS || UCS)
         {
@@ -323,7 +323,7 @@ void Searcher::Print()
     {
          cout << "(" << ( mPath[k]->getColumn() ) << "," <<  BOARDSIZE - ( mPath[k]->getRow() ) - 1 << ")";
 
-         if( k < path.size() - 1 )
+         if( k < mPath.size() - 1 )
          {
              cout << " -> ";
          }
