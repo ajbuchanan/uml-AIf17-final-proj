@@ -9,21 +9,25 @@
 
 using namespace std;
 
-typedef enum searchType {AStar, BFS, DFS, UCS} SearchType;
+typedef enum searchType {AStar, BFS, DFS, UCS, Beam, Hill} SearchType;
 
-class Results
+class Result
 {
 private:
     int mTotalMoves;
     int mNumExpanded;
-    SearchType mAlgorithUsed;
+    int mMaxFrontier;
+    bool mFoundGoal;
+    SearchType mAlgorithmUsed;
     deque<Node*> mPath;
 
 public:
-    Results(int, int, std::vector<Node>);
+    Result(int, int, int, bool, SearchType, vector<Node>);
 
     int getTotalMoves();
     int getNumExpanded();
+    int getMaxFrontier();
+    bool foundGoal();
     SearchType getAlgorithmUsed();
     deque<Node*> getPath();
 };

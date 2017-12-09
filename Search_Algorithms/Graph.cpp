@@ -1,16 +1,8 @@
 #include "Graph.hpp"
 
-Graph::Graph(std::vector<Node*> nodes, std::vector<Edge*> edges)
+Graph::Graph(Node* rootNode)
 {
-    if(nodes != null)
-    {
-        mNodes = nodes;
-    }
-
-    if(edges != null)
-    {
-        mEdges = edges;
-    }
+    mRootNode = rootNode;
 }
 
 void Graph::addNode(Node* node)
@@ -36,6 +28,11 @@ Node* Graph::getNode(std::pair<int,int> coord)
 Node* Graph::getNode(int row, int col)
 {
     return getNode(std::pair(row,col));
+}
+
+Node* Graph::getRoot()
+{
+    return mRootNode;
 }
 
 std::vector<Node*> Graph::getSuccessors(Node* parent)

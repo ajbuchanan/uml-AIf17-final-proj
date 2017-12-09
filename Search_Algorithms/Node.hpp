@@ -6,8 +6,6 @@ private:
     int mDepth;
     int mCost;
 
-    Node* mParent;
-
 public:
     Node(int, int, int, Node*, int cost = 0);
 
@@ -17,5 +15,4 @@ public:
     int getColumn();
     int getDepth();
     int getCost();
-    Node* getParent();
 };

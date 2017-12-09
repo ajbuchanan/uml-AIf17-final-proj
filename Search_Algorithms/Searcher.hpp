@@ -5,9 +5,10 @@
 #include <cstdlib>
 #include <fstream>
 #include <iostream>
+#include <algorithm>
 
 #include "Node.hpp"
-#include "Results.hpp"
+#include "Result.hpp"
 #include "Graph.hpp"
 
 using namespace std;
@@ -15,18 +16,10 @@ using namespace std;
 //Size of an edge of a maze N x N
 static const int BOARDSIZE = 10;
 
-//Which algorithm we are using
-static bool BFS = true;     //Breadth First Search
-static bool DFS = false;    //Depth First Search
-static bool AS  = false;    //A*
-static bool UCS = false;    //Uniform Cost Search
-
 //Constants defining what each node on the map is
 static const char EMPT   = '.'; //Empty space
 static const char START  = 's'; //Starting Position
 static const char WALL   = 'x'; //Obstacle
-static const char OPEN   = 'o'; //Node that has been added to queue but not expanded
-static const char EXP    = 'e'; //Node that has been expanded (visited)
 static const char GOAL   = 'g'; //Goal State
 
 class Searcher
@@ -34,6 +27,8 @@ class Searcher
 private:
     char mMaze[BOARDSIZE][BOARDSIZE];
     char mRoute[BOARDSIZE][BOARDSIZE];
+
+    string mProblemFile;
 
     //Start Position
     int mStartRow;
@@ -44,34 +39,36 @@ private:
     int mGoalCol;
 
     int mNumMoves;
+    int mNumExpanded;
     int mMaxQueue;
-
-    //If set to true will print to console the results of the searches
-    bool mDebugMode;
 
     deque<Node*> mFrontier;
     deque<Node*> mVisited;
     deque<Node*> mPath;
 
+    vector<Result> mResults;
+
     Graph mGraph;
 
     //Private funcs
-    void        Search();
-    void        GenericSearch(int, int);
-    void        HeuristicSearch(int, int, int, Node*);
-    void        GeneratePath();
-    Results*    GenerateResults();
+    void                    GeneratePath(map<Node*,Node*>,Node*);
+    Results                 GenerateResults(bool,SearchType);
+    bool                    BeamEval(Node*,Node*);
+    int                     HillClimbingEval(Node*);
+    void                    CleanUp();
 
 public:
-    Searcher(std::string file = "TestProblems/template.map", bool debug = false);
+    /*Constructor*/         Searcher(string);
 
-    void        AStarSearch();
-    void        BreadthFirstSearch();
-    void        DepthFirstSearch();
-    void        UniformCostSearch();
+    vector<Result>          SearchAll();
+
+    Result                  AStarSearch();
+    Result                  BreadthFirstSearch();
+    Result                  DepthFirstSearch();
+    Result                  UniformCostSearch();
+
+    Graph                   GetGraph()const;
 
     //utility functions
-    void        Print();
-    void        CleanUp();
-    void        SetDebugMode(bool); //turns on or off debug mode
+    void                    Print();
 };
