@@ -1,3 +1,6 @@
+#ifndef SEARCHER_HPP
+#define SEARCHER_HPP
+
 #include <deque>
 #include <climits>
 #include <math.h>
@@ -11,8 +14,6 @@
 #include "Result.hpp"
 #include "Graph.hpp"
 
-using namespace std;
-
 //Size of an edge of a maze N x N
 static const int BOARDSIZE = 10;
 
@@ -21,7 +22,7 @@ static const char EMPT   = '.'; //Empty space
 static const char START  = 's'; //Starting Position
 static const char WALL   = 'x'; //Obstacle
 static const char GOAL   = 'g'; //Goal State
-
+    
 class Searcher
 {
 private:
@@ -42,9 +43,9 @@ private:
     int mNumExpanded;
     int mMaxQueue;
 
-    deque<Node*> mFrontier;
-    deque<Node*> mVisited;
-    deque<Node*> mPath;
+    std::deque<Node*> mFrontier;
+    std::deque<Node*> mVisited;
+    std::deque<Node*> mPath;
 
     vector<Result> mResults;
 
@@ -56,6 +57,8 @@ private:
     bool                    BeamEval(Node*,Node*);
     int                     HillClimbingEval(Node*);
     void                    CleanUp();
+
+    int ManhattanDistance(int row, int col);
 
 public:
     /*Constructor*/         Searcher(string);
@@ -72,3 +75,5 @@ public:
     //utility functions
     void                    Print();
 };
+
+#endif

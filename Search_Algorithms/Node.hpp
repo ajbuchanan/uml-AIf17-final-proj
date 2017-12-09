@@ -1,3 +1,6 @@
+#ifndef NODE_HPP
+#define NODE_HPP
+
 class Node
 {
 private:
@@ -5,9 +8,8 @@ private:
     int mCol;
     int mDepth;
     int mCost;
-
 public:
-    Node(int, int, int, Node*, int cost = 0);
+    Node(int row, int col, int depth, Node* parent, int cost);
 
     ~Node();
 
@@ -16,3 +18,5 @@ public:
     int getDepth();
     int getCost();
 };
+
+#endif

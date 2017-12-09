@@ -1,13 +1,9 @@
+#ifndef RESULTS_HPP
+#define RESULTS_HPP
+
 #include <deque>
-#include <math.h>
-#include <string>
-#include <cstdlib>
-#include <fstream>
-#include <iostream>
 
 #include "Node.hpp"
-
-using namespace std;
 
 typedef enum searchType {AStar, BFS, DFS, UCS, Beam, Hill} SearchType;
 
@@ -19,7 +15,7 @@ private:
     int mMaxFrontier;
     bool mFoundGoal;
     SearchType mAlgorithmUsed;
-    deque<Node*> mPath;
+    std::deque<Node*> mPath;
 
 public:
     Result(int, int, int, bool, SearchType, vector<Node>);
@@ -29,5 +25,7 @@ public:
     int getMaxFrontier();
     bool foundGoal();
     SearchType getAlgorithmUsed();
-    deque<Node*> getPath();
+    std::deque<Node*> getPath();
 };
+
+#endif
