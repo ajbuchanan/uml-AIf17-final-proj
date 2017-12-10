@@ -34,7 +34,7 @@ class GeneticAlgorithmBool
     // The constructor of the genetic algorithm is private because the class
     // is a singleton.
     GeneticAlgorithmBool(unsigned int number_of_traits, unsigned int size_of_initial_population, unsigned int number_of_generations)
-        : m_number_of_traits(number_of_traits), m_size_of_initial_population(size_of_initial_population), m_number_of_generations(size_of_initial_population) { }
+        : m_number_of_traits(number_of_traits), m_size_of_population(size_of_initial_population), m_number_of_generations(size_of_initial_population) { }
 
     /*-----------------------------------------------------------------
         This function generates pseudo-random sequences for each of the
@@ -66,7 +66,7 @@ class GeneticAlgorithmBool
     std::vector<bool> m_fittest_population;
 
     unsigned int m_number_of_traits;
-    unsigned int m_size_of_initial_population;
+    unsigned int m_size_of_population;
     unsigned int m_number_of_generations;
 };
 

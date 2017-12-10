@@ -1,6 +1,6 @@
 #include "Result.hpp"
 
-Result::Result(int moves, int expanded, int frontier, bool success, SearchType type, std::vector<Node*> path)
+Result::Result(int moves, int expanded, int frontier, bool success, SearchType type, std::deque<Node*> path)
 {
     mNumMoves = moves;
     mNumExpanded = expanded;
@@ -8,7 +8,6 @@ Result::Result(int moves, int expanded, int frontier, bool success, SearchType t
     mFoundGoal = success;
     mAlgorithmUsed = type;
     mPath = path;
-    
 }
 
 int Result::getTotalMoves()
@@ -36,7 +35,7 @@ SearchType Result::getAlgorithmUsed()
     return mAlgorithmUsed;
 }
 
-deque<Node*> Result::getPath()
+std::deque<Node*> Result::getPath()
 {
     return mPath;
 }

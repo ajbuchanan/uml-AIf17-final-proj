@@ -1,6 +1,10 @@
-#include "Searcher.hpp"
+#include <cstdlib>
+#include <climits>
+#include <fstream>
+#include <iostream>
+#include <algorithm>
 
-using namespace std;
+#include "Searcher.hpp"
 
 Searcher::Searcher(std::string file)
 {
@@ -10,10 +14,10 @@ Searcher::Searcher(std::string file)
     mNumExpanded = 0;
     mMaxQueue = 0;
 
-    generateGraph(file);
+    GenerateGraph(file);
 }
 
-vector<Result> Searcher::SearchAll()
+std::vector<Result> Searcher::SearchAll()
 {
     mResults.push_back(BreadthFirstSearch());
     CleanUp();
@@ -33,13 +37,13 @@ vector<Result> Searcher::SearchAll()
     mResults.push_back(HillClimbingSearch());
     CleanUp();
 
-    return mResults
+    return mResults;
 }
 
 void Searcher::GenerateGraph(std::string file)
 {
-    ifstream mazeFile;
-    mazeFile.open(file, ios::in);
+    std::ifstream mazeFile;
+    mazeFile.open(file, std::ios::in);
     char gMaze[BOARDSIZE][BOARDSIZE]; 
 
     if(mazeFile.is_open())
@@ -71,7 +75,7 @@ void Searcher::GenerateGraph(std::string file)
     }
     else
     {
-        cout << "Unable to open file";
+        std::cout << "Unable to open file";
     }
 
     int numLooked = 0;
@@ -80,15 +84,15 @@ void Searcher::GenerateGraph(std::string file)
     int currentRow = mStartRow;
     Node* prevNode = new Node(mStartRow, mStartCol, 0, ManhattanDistance(mStartRow, mStartCol));
 
-    deque<pair<Node*,Node*> > graphQueue;
+    std::deque<std::pair<Node*,Node*> > graphQueue;
 
-    graphQueue.push_back(pair(NULL, prevNode));
+    graphQueue.push_back(std::pair<Node*, Node*>(NULL, prevNode));
 
     mGraph = Graph(prevNode);
 
     while(graphQueue.size() > 0)
     {
-        pair<Node*,Node*> current = graphQueue.front();
+        std::pair<Node*,Node*> current = graphQueue.front();
         graphQueue.pop_front();
         int row = current.second->getRow();
         int col = current.second->getColumn();
@@ -96,35 +100,35 @@ void Searcher::GenerateGraph(std::string file)
 
         if(row+1 < BOARDSIZE && (gMaze[row+1][col] == EMPT || gMaze[row+1][col] == GOAL))
         {
-            Node* upNode = new Node(row+1, col, numLooked, ManhattanDistance(row+1, col))
+            Node* upNode = new Node(row+1, col, numLooked, ManhattanDistance(row+1, col));
             mGraph.addNode(upNode);
             mGraph.addEdge(current.second, upNode);
 
-            graphQueue.push_back(std::pair(current.second, upNode));
+            graphQueue.push_back(std::pair<Node*, Node*>(current.second, upNode));
         }
         if(row-1 >= 0 && (gMaze[row-1][col] == EMPT || gMaze[row-1][col] == GOAL))
         {
-            Node* downNode = new Node(row-1, col, numLooked, ManhattanDistance(row-1, col))
+            Node* downNode = new Node(row-1, col, numLooked, ManhattanDistance(row-1, col));
             mGraph.addNode(downNode);
             mGraph.addEdge(current.second, downNode);
 
-            graphQueue.push_back(std::pair(current.second, downNode));
+            graphQueue.push_back(std::pair<Node*, Node*>(current.second, downNode));
         }
         if(col+1 < BOARDSIZE && (gMaze[row][col+1] == EMPT || gMaze[row][col+1] == GOAL))
         {
-            Node* rightNode = new Node(row, col+1, numLooked, ManhattanDistance(row, col+1))
+            Node* rightNode = new Node(row, col+1, numLooked, ManhattanDistance(row, col+1));
             mGraph.addNode(rightNode);
             mGraph.addEdge(current.second, rightNode);
 
-            graphQueue.push_back(std::pair(current.second, rightNode));
+            graphQueue.push_back(std::pair<Node*, Node*>(current.second, rightNode));
         }
         if(col-1 >= 0 && (gMaze[row][col-1] == EMPT || gMaze[row][col-1] == GOAL))
         {
-            Node* leftNode = new Node(row, col-1, numLooked, ManhattanDistance(row, col-1))
+            Node* leftNode = new Node(row, col-1, numLooked, ManhattanDistance(row, col-1));
             mGraph.addNode(leftNode);
             mGraph.addEdge(current.second, leftNode);
 
-            graphQueue.push_back(std::pair(current.second, leftNode));
+            graphQueue.push_back(std::pair<Node*, Node*>(current.second, leftNode));
         }
     }
 }
@@ -133,7 +137,7 @@ Result Searcher::DepthFirstSearch()
 {
     Node* currentNode = mGraph.getRoot();
     Node* prevNode = NULL;
-    map<Node*, Node*> DFSPath;
+    std::map<Node*, Node*> DFSPath;
 
     mFrontier.push_front(currentNode);
 
@@ -143,7 +147,7 @@ Result Searcher::DepthFirstSearch()
         
         DFSPath[currentNode] = prevNode;
 
-        vector<Node*> successors = mGraph.getSuccessors(currentNode);
+        std::vector<Node*> successors = mGraph.getSuccessors(currentNode);
         mNumExpanded++;
 
         mVisited.push_back(currentNode);
@@ -165,14 +169,14 @@ Result Searcher::DepthFirstSearch()
 
     GeneratePath(DFSPath, currentNode);
     
-    return GenerateResults(true, SearchType.DFS);
+    return GenerateResults(true, DFS);
 }
 
-Results Searcher::BreadthFirstSearch()
+Result Searcher::BreadthFirstSearch()
 {
     Node* currentNode = mGraph.getRoot();
     Node* prevNode = NULL;
-    map<Node*, Node*> BFSPath;
+    std::map<Node*, Node*> BFSPath;
 
     mFrontier.push_back(currentNode);
 
@@ -182,7 +186,7 @@ Results Searcher::BreadthFirstSearch()
         
         BFSPath[currentNode] = prevNode;
 
-        vector<Node*> successors = mGraph.getSuccessors(currentNode);
+        std::vector<Node*> successors = mGraph.getSuccessors(currentNode);
         mNumExpanded++;
 
         mVisited.push_back(currentNode);
@@ -204,17 +208,17 @@ Results Searcher::BreadthFirstSearch()
 
     GeneratePath(BFSPath, currentNode);
     
-    return GenerateResults(true, SearchType.BFS);
+    return GenerateResults(true, BFS);
 }
 
-Results Searcher::AStarSearch()
+Result Searcher::AStarSearch()
 {
     Node* currentNode = mGraph.getRoot();
     mFrontier.push_back(currentNode);
-    map<Node*, Node*> ASPath;
-    map<Node*, int> gScore;
+    std::map<Node*, Node*> ASPath;
+    std::map<Node*, int> gScore;
     gScore[currentNode] = 0;
-    map<Node*, int> fScore;
+    std::map<Node*, int> fScore;
     fScore[currentNode] = currentNode->getCost();
 
     while(mFrontier.size() > 0)
@@ -238,7 +242,7 @@ Results Searcher::AStarSearch()
 
         mVisited.push_back(currentNode);
 
-        vector<Node*> successors = mGraph.getSuccessors(currentNode);
+        std::vector<Node*> successors = mGraph.getSuccessors(currentNode);
         mNumExpanded++;
 
         for(int i = 0; i < successors.size(); i++)
@@ -256,7 +260,7 @@ Results Searcher::AStarSearch()
                 }
             }
 
-            tempScore = gScore[currentNode] + 1;
+            int tempScore = gScore[currentNode] + 1;
             if(gScore.count(successors[i]) == 1 && tempScore >= gScore[successors[i]])
             {
                 continue;
@@ -270,17 +274,17 @@ Results Searcher::AStarSearch()
 
     GeneratePath(ASPath, currentNode);
     
-    return GenerateResults(true, SearchType.AStar);
+    return GenerateResults(true, AStar);
 }
 
-void Searcher::UniformCostSearch()
+Result Searcher::UniformCostSearch()
 {
     Node* currentNode = mGraph.getRoot();
     mFrontier.push_back(currentNode);
-    map<Node*, Node*> UCSPath;
-    map<Node*, int> gScore;
+    std::map<Node*, Node*> UCSPath;
+    std::map<Node*, int> gScore;
     gScore[currentNode] = 0;
-    map<Node*, int> fScore;
+    std::map<Node*, int> fScore;
     fScore[currentNode] = 1;
 
     while(mFrontier.size() > 0)
@@ -304,7 +308,7 @@ void Searcher::UniformCostSearch()
 
         mVisited.push_back(currentNode);
 
-        vector<Node*> successors = mGraph.getSuccessors(currentNode);
+        std::vector<Node*> successors = mGraph.getSuccessors(currentNode);
         mNumExpanded++;
 
         for(int i = 0; i < successors.size(); i++)
@@ -322,7 +326,7 @@ void Searcher::UniformCostSearch()
                 }
             }
 
-            tempScore = gScore[currentNode] + 1;
+            int tempScore = gScore[currentNode] + 1;
             if(gScore.count(successors[i]) == 1 && tempScore >= gScore[successors[i]])
             {
                 continue;
@@ -336,7 +340,7 @@ void Searcher::UniformCostSearch()
 
     GeneratePath(UCSPath, currentNode);
     
-    return GenerateResults(true, SearchType.UCS);
+    return GenerateResults(true, UCS);
 }
 
 Result Searcher::HillClimbingSearch()
@@ -344,25 +348,25 @@ Result Searcher::HillClimbingSearch()
     Node* currentNode = mGraph.getRoot();
     int nextEval = -INT_MAX;
     Node* nextNode = NULL;
-    map<Node*,Node*> HillPath;
-    success = false;
+    std::map<Node*,Node*> HillPath;
+    bool success = false;
 
     while(!IsGoal(currentNode))
     {
         mNumMoves++;
 
-        vector<Node*> children = mGraph.getSuccessors(currentNode);
+        std::vector<Node*> children = mGraph.getSuccessors(currentNode);
         mNumExpanded++;
 
         mMaxQueue += children.size() - 1;
 
         for(int i = 0; i < children.size(); i++)
         {
-            int childEval = HillClimbingEval(children[i])
+            int childEval = HillClimbingEval(children[i]);
             if(childEval > nextEval)
             {
                 nextNode = children[i];
-                nextEval = childEval
+                nextEval = childEval;
             }
         }
 
@@ -382,7 +386,7 @@ Result Searcher::HillClimbingSearch()
 
     GeneratePath(HillPath, currentNode);
 
-    return GenerateResults(success, SearchType.Hill);
+    return GenerateResults(success, Hill);
 }
 
 int Searcher::HillClimbingEval(Node* node)
@@ -395,7 +399,7 @@ Result Searcher::BeamSearch()
 {
     Node* currentNode = mGraph.getRoot();
     Node* prevNode = NULL;
-    map<Node*,Node*> BeamPath;
+    std::map<Node*,Node*> BeamPath;
 
     const int BEAM_SIZE = 4;
 
@@ -408,7 +412,7 @@ Result Searcher::BeamSearch()
         currentNode = mFrontier.front();
         mFrontier.pop_front();
 
-        vector<Node*> children = mGraph.getSuccessors(currentNode);
+        std::vector<Node*> children = mGraph.getSuccessors(currentNode);
         mNumExpanded++;
 
         for(int i  = 0; i < children.size(); i++)
@@ -435,7 +439,7 @@ Result Searcher::BeamSearch()
 
     GeneratePath(BeamPath, currentNode);
 
-    return GenerateResults(IsGoal(currentNode), SearchType.Beam);
+    return GenerateResults(IsGoal(currentNode), Beam);
 }
 
 bool Searcher::BeamEval(Node* a, Node* b)
@@ -443,7 +447,7 @@ bool Searcher::BeamEval(Node* a, Node* b)
     return (a->getCost() < b->getCost());
 }
 
-void Searcher::GeneratePath(map<Node*, Node*> path, Node* currentNode)
+void Searcher::GeneratePath(std::map<Node*, Node*> path, Node* currentNode)
 {
     while(currentNode != NULL)
     {
@@ -469,7 +473,7 @@ Result Searcher::GenerateResults(bool success, SearchType type)
     return Result(mNumMoves, mNumExpanded, mMaxQueue, success, type, mPath);
 }
 
-Graph Searcher::getGraph()
+Graph Searcher::GetGraph() const
 {
     return mGraph;
 }

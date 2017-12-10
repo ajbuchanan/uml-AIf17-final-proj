@@ -16,6 +16,6 @@ public:
     int getCost();
     Node* getFrom();
     Node* getTo();
-}
+};
 
 #endif

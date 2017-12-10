@@ -6,18 +6,14 @@
 #include <vector>
 #include <math.h>
 #include <string>
-#include <cstdlib>
-#include <climits>
-#include <fstream>
-#include <iostream>
-#include <algorithm>
+
 
 #include "Node.hpp"
 #include "Result.hpp"
 #include "Graph.hpp"
 
 //Size of an edge of a maze N x N
-#define BOARDSIZE = 10;
+#define BOARDSIZE 10
 
 //Constants defining what each node on the map is
 static const char EMPT   = '.'; //Empty space
@@ -31,7 +27,7 @@ private:
     char mMaze[BOARDSIZE][BOARDSIZE];
     char mRoute[BOARDSIZE][BOARDSIZE];
 
-    string mProblemFile;
+    std::string mProblemFile;
 
     //Start Position
     int mStartRow;
@@ -54,26 +50,29 @@ private:
     Graph mGraph;
 
     //Private funcs
-    void                    GeneratePath(map<Node*,Node*>,Node*);
+    void                    GeneratePath(std::map<Node*,Node*>,Node*);
     Result                  GenerateResults(bool,SearchType);
-    void                    GenerateGraph();
+    void                    GenerateGraph(std::string file);
     bool                    BeamEval(Node*,Node*);
     int                     HillClimbingEval(Node*);
+    bool                    IsGoal(Node* node);
     void                    CleanUp();
 
     int                     ManhattanDistance(int row, int col);
 
 public:
-    /*Constructor*/         Searcher(string);
+    /*Constructor*/         Searcher(std::string);
 
-    std::vector<Result>          SearchAll();
+    std::vector<Result>     SearchAll();
 
     Result                  AStarSearch();
     Result                  BreadthFirstSearch();
     Result                  DepthFirstSearch();
     Result                  UniformCostSearch();
+    Result                  BeamSearch();
+    Result                  HillClimbingSearch();
 
-    Graph                   GetGraph()const;
+    Graph                   GetGraph() const;
 
     //utility functions
     void                    Print();

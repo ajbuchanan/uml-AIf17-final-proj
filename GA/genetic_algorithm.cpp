@@ -42,7 +42,9 @@ void GeneticAlgorithmBool::generate_random_population()
     
 void GeneticAlgorithmBool::fitness_function()
 {
-    
+    int highest_score = 0;
+
+    for(unsigned int i = 0; i < m_size_of_population)
 }
 
 void GeneticAlgorithmBool::crossover()

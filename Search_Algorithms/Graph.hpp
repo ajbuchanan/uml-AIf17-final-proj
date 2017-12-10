@@ -16,6 +16,7 @@ private:
     std::map<Node*, std::vector<Edge*> > mEdges;
 
 public:
+    Graph() { }
     Graph(Node*);
 
     void addNode(Node*);
@@ -30,6 +31,6 @@ public:
     std::vector<Node*> getSuccessors(int, int);
     std::vector<Node*> getSuccessors(std::pair<int,int>);
     
-}
+};
 
 #endif
