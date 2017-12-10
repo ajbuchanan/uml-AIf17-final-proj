@@ -1,11 +1,13 @@
 #ifndef SEARCHER_HPP
 #define SEARCHER_HPP
 
+#include <map>
 #include <deque>
-#include <climits>
+#include <vector>
 #include <math.h>
 #include <string>
 #include <cstdlib>
+#include <climits>
 #include <fstream>
 #include <iostream>
 #include <algorithm>
@@ -15,7 +17,7 @@
 #include "Graph.hpp"
 
 //Size of an edge of a maze N x N
-static const int BOARDSIZE = 10;
+#define BOARDSIZE = 10;
 
 //Constants defining what each node on the map is
 static const char EMPT   = '.'; //Empty space
@@ -47,23 +49,24 @@ private:
     std::deque<Node*> mVisited;
     std::deque<Node*> mPath;
 
-    vector<Result> mResults;
+    std::vector<Result> mResults;
 
     Graph mGraph;
 
     //Private funcs
     void                    GeneratePath(map<Node*,Node*>,Node*);
-    Results                 GenerateResults(bool,SearchType);
+    Result                  GenerateResults(bool,SearchType);
+    void                    GenerateGraph();
     bool                    BeamEval(Node*,Node*);
     int                     HillClimbingEval(Node*);
     void                    CleanUp();
 
-    int ManhattanDistance(int row, int col);
+    int                     ManhattanDistance(int row, int col);
 
 public:
     /*Constructor*/         Searcher(string);
 
-    vector<Result>          SearchAll();
+    std::vector<Result>          SearchAll();
 
     Result                  AStarSearch();
     Result                  BreadthFirstSearch();

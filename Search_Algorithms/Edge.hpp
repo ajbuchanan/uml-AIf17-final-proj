@@ -1,3 +1,6 @@
+#ifndef EDGE_HPP
+#define EDGE_HPP
+
 #include "Node.hpp"
 
 class Edge
@@ -14,3 +17,5 @@ public:
     Node* getFrom();
     Node* getTo();
 }
+
+#endif

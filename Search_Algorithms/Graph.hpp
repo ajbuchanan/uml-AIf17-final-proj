@@ -1,3 +1,9 @@
+#ifndef GRAPH_HPP
+#define GRAPH_HPP
+
+#include <map>
+#include <vector>
+
 #include "Node.hpp"
 #include "Edge.hpp"
 
@@ -24,3 +30,5 @@ public:
     std::vector<Node*> getSuccessors(std::pair<int,int>);
     
 }
+
+#endif

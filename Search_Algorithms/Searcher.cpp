@@ -27,10 +27,16 @@ vector<Result> Searcher::SearchAll()
     mResults.push_back(UniformCostSearch());
     CleanUp();
 
+    mResults.push_back(BeamSearch());
+    CleanUp();
+
+    mResults.push_back(HillClimbingSearch());
+    CleanUp();
+
     return mResults
 }
 
-Graph* Searcher::generateGraph(std::string file)
+void Searcher::GenerateGraph(std::string file)
 {
     ifstream mazeFile;
     mazeFile.open(file, ios::in);

@@ -9,7 +9,7 @@ private:
     int mDepth;
     int mCost;
 public:
-    Node(int row, int col, int depth, Node* parent, int cost);
+    Node(int row, int col, int depth, int cost);
 
     ~Node();
 
