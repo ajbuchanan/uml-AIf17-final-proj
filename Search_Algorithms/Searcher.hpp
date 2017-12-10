@@ -20,6 +20,7 @@ static const char EMPT   = '.'; //Empty space
 static const char START  = 's'; //Starting Position
 static const char WALL   = 'x'; //Obstacle
 static const char GOAL   = 'g'; //Goal State
+static const char EXP    = 'e'; //expanded state
     
 class Searcher
 {
