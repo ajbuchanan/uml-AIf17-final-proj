@@ -7,7 +7,7 @@ Graph::Graph(Node* rootNode)
 
 void Graph::addNode(Node* node)
 {
-    std::pair<int,int> coord = pair(node->getRow(),node->getColumn());
+    std::pair<int,int> coord = std::pair<int, int>(node->getRow(),node->getColumn());
 
     if(mNodes.count(coord) != 1)
     {
@@ -27,7 +27,7 @@ Node* Graph::getNode(std::pair<int,int> coord)
 
 Node* Graph::getNode(int row, int col)
 {
-    return getNode(std::pair(row,col));
+    return getNode(std::pair<int, int>(row,col));
 }
 
 Node* Graph::getRoot()
@@ -35,24 +35,24 @@ Node* Graph::getRoot()
     return mRootNode;
 }
 
-std::vector<Node*> Graph::getSuccessors(Node* parent)
+std::deque<Node*> Graph::getSuccessors(Node* parent)
 {
-    std::vector<Node*> successors;
+    std::deque<Node*> successors;
 
-    for(int i = 0; i < mEdges[parent].size(); i++)
+    for(int i = 0; i < mNodes[parent].size(); i++)
     {
-        successors.push_front(mEdges[parent][i]);
+        successors.push_front(mNodes[parent][i]);
     }
 
     return successors;
 }
 
-std::vector<Node*> Graph::getSuccessors(int row, int col)
+std::deque<Node*> Graph::getSuccessors(int row, int col)
 {
     return getSuccessors(getNode(row, col));
 }
 
-std::vector<Node*> Graph::getSuccessors(std::pair<int,int> coord)
+std::deque<Node*> Graph::getSuccessors(std::pair<int,int> coord)
 {
     return getSuccessors(getNode(coord));
 }

@@ -19,4 +19,4 @@ public:
     int getCost();
 };
 
-#endif
+#endif // NODE_HPP

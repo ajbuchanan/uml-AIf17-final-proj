@@ -1,8 +1,8 @@
 #ifndef GRAPH_HPP
 #define GRAPH_HPP
 
+#include <deque>
 #include <map>
-#include <vector>
 #include <utility>
 
 #include "Node.hpp"
@@ -13,7 +13,7 @@ class Graph
 private:
     Node* mRootNode;
     std::map<std::pair<int,int>,Node*> mNodes;
-    std::map<Node*, std::vector<Edge*> > mEdges;
+    std::map<Node*, std::deque<Edge*> > mEdges;
 
 public:
     Graph() { }
@@ -27,9 +27,9 @@ public:
 
     Node* getRoot();
     
-    std::vector<Node*> getSuccessors(Node*);
-    std::vector<Node*> getSuccessors(int, int);
-    std::vector<Node*> getSuccessors(std::pair<int,int>);
+    std::deque<Node*> getSuccessors(Node*);
+    std::deque<Node*> getSuccessors(int, int);
+    std::deque<Node*> getSuccessors(std::pair<int,int>);
     
 };
 

@@ -3,8 +3,8 @@
     Declaration of classes Neuron and FF_ANN.
 */
 
-#ifndef FF_ANN_HPP
-#define FF_ANN_HPP
+#ifndef FEEDFORWARDANN_HPP
+#define FEEDFORWARDANN_HPP
 
 #include <map> // std::map
 #include <memory> // std::shared_ptr
@@ -66,4 +66,4 @@ private:
 	std::vector<OutputLayerNeuron> m_output_layer;
 };
 
-#endif // FF_ANN_HPP
+#endif // FEEDFORWARDANN_HPP

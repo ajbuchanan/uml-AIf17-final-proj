@@ -1,8 +1,6 @@
 /*  Copyright 2017 George Le
 
-    Creates usable data
 */
-
 #ifndef EXPECTED_DATA_HPP
 #define EXPECTED_DATA_HPP
 

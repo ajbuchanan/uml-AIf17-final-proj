@@ -7,7 +7,6 @@
 #include <math.h>
 #include <string>
 
-
 #include "Node.hpp"
 #include "Result.hpp"
 #include "Graph.hpp"

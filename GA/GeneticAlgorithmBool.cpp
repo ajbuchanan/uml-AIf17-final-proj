@@ -1,6 +1,6 @@
 #include <random>
 
-#include "genetic_algorithm.hpp"
+#include "GeneticAlgorithmBool.hpp"
 
 bool return_random_bool()
 {
@@ -19,7 +19,7 @@ bool return_random_bool()
 
 void GeneticAlgorithmBool::generate_random_population()
 {
-    for(int i = 0; i < m_size_of_initial_population; ++i)
+    for(int i = 0; i < m_size_of_population; ++i)
     {
         for(int j = 0; i < m_number_of_traits; ++i)
         {
@@ -42,9 +42,12 @@ void GeneticAlgorithmBool::generate_random_population()
     
 void GeneticAlgorithmBool::fitness_function()
 {
-    int highest_score = 0;
+    int highest_score = 0, index_of_highest_scores = 0;
 
-    for(unsigned int i = 0; i < m_size_of_population)
+    for(unsigned int i = 0; i < m_size_of_population; ++i)
+    {
+        
+    }
 }
 
 void GeneticAlgorithmBool::crossover()

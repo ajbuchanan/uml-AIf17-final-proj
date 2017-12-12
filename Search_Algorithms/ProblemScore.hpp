@@ -27,4 +27,4 @@ public:
     std::map<SearchType,int>    getScores();
 };
 
-#endif
+#endif // PROBLEM_SCORE_HPP

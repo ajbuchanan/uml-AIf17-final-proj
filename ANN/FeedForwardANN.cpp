@@ -5,7 +5,7 @@ Implementation of functions belonging to the FF_ANN and Neuron class
 */
 #include <cmath> // exp()
 
-#include "FF_ANN.hpp"
+#include "FeedForwardANN.hpp"
 
 bool FF_ANN::push_back(std::vector<InputLayerNeuron> layer)
 {

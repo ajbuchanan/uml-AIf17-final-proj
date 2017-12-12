@@ -8,7 +8,8 @@
 #include <memory> // std::shared_ptr
 #include <vector> // std::vector
 
-#include "Search_Algorithms/Results.hpp"
+#include "Search_Algorithms/Result.hpp"
+#include "Search_Algorithms/ProblemScore.hpp"
 #include "expected_data.hpp"
 
 class GeneticAlgorithmBool
@@ -52,12 +53,12 @@ class GeneticAlgorithmBool
     void fitness_function();
     
     /*-----------------------------------------------------------------
-    
+        TBD
     -----------------------------------------------------------------*/
     void crossover();
 
     /*-----------------------------------------------------------------
-    
+        TBD
     -----------------------------------------------------------------*/
     void mutation();
 

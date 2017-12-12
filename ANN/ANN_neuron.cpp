@@ -43,8 +43,8 @@ std::vector<std::shared_ptr<Neuron>> NeuronFactory::generate_layer(std::vector<d
 		case INPUT_LAYER:
 		for(unsigned int i = 0; i < size; ++i)
 		{
-			InputLayerNeuron* temp = new InputLayerNeuron(input_vectors.at(i));
-			temp.push_back(temp);
+			std::shared_ptr<Neuron> temp_neuron(new InputLayerNeuron(input_vectors.at(i)));
+			temp.push_back(temp_neuron);
 		}
 		break;
 		case HIDDEN_LAYER:
