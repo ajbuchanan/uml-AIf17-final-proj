@@ -4,44 +4,42 @@ ProblemScore::ProblemScore(std::vector<Result> results)
 {
     mProblemResults = results;
 
-    mScores[AStar] = 0;
-    mScores[Beam] = 0;
-    mScores[BFS] = 0;
-    mScores[DFS] = 0;
-    mScores[Hill] = 0;
-    mScores[UCS] = 0;
+    for(int i = 0; i < SearchType.LAST_SEARCH_TYPE; i++)
+    {
+        mScores.push_back(0);
+    }
 
     GenerateScores();
 }
 
 int ProblemScore::getASScore()
 {
-    return mScores[AStar];
+    return mScores[SearchType.AStar];
 }
 
 int ProblemScore::getBeamScore()
 {
-    return mScores[Beam];
+    return mScores[SearchType.Beam];
 }
 
 int ProblemScore::getBFSScore()
 {
-    return mScores[BFS];
+    return mScores[SearchType.BFS];
 }
 
 int ProblemScore::getDFSScore()
 {
-    return mScores[DFS];
+    return mScores[SearchType.DFS];
 }
 
 int ProblemScore::getHillScore()
 {
-    return mScores[Hill];
+    return mScores[SearchType.Hill];
 }
 
 int ProblemScore::getUCSScore()
 {
-    return mScores[UCS];
+    return mScores[SearchType.UCS];
 }
 
 std::vector<Result> ProblemScore::getResults()

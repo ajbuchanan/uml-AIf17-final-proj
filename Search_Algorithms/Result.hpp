@@ -6,7 +6,7 @@
 
 #include "Node.hpp"
 
-typedef enum searchType {AStar, BFS, DFS, UCS, Beam, Hill} SearchType;
+typedef enum searchType {AStar, BFS, DFS, UCS, Beam, Hill, LAST_SEARCH_TYPE} SearchType;
 
 class Result
 {
