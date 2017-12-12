@@ -7,6 +7,7 @@
 #include <math.h>
 #include <string>
 
+#include "ProblemScore.hpp"
 #include "Node.hpp"
 #include "Result.hpp"
 #include "Graph.hpp"
@@ -73,6 +74,7 @@ public:
     Result                  HillClimbingSearch();
 
     Graph                   GetGraph() const;
+    ProblemScore            GetScore() const;
 
     //utility functions
     void                    Print();

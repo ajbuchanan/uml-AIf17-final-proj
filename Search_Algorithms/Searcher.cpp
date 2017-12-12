@@ -478,6 +478,11 @@ Graph Searcher::GetGraph() const
     return mGraph;
 }
 
+ProblemScore Searcher::GetScore()
+{
+    return ProblemScore(mResults);
+}
+
 int Searcher::ManhattanDistance(int row, int col)
 {
     int dist = abs(row - mGoalRow) + abs(col - mGoalCol);
