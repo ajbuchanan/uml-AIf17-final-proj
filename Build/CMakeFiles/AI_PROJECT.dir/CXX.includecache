@@ -9,16 +9,44 @@
 /mnt/c/Users/George Le/Documents/GitHub/Teaching/AI_project/FINAL_PROJECT/Build/driver.cpp
 iostream
 -
-FF_ANN.hpp
-/mnt/c/Users/George Le/Documents/GitHub/Teaching/AI_project/FINAL_PROJECT/Build/FF_ANN.hpp
+ANN/FeedForwardANN.hpp
+/mnt/c/Users/George Le/Documents/GitHub/Teaching/AI_project/FINAL_PROJECT/Build/ANN/FeedForwardANN.hpp
 GA/GeneticAlgorithmBool.hpp
 /mnt/c/Users/George Le/Documents/GitHub/Teaching/AI_project/FINAL_PROJECT/Build/GA/GeneticAlgorithmBool.hpp
 
 /mnt/c/Users/George Le/Documents/GitHub/Teaching/AI_project/FINAL_PROJECT/GA/GeneticAlgorithmBool.cpp
 random
 -
-genetic_algorithm.hpp
-/mnt/c/Users/George Le/Documents/GitHub/Teaching/AI_project/FINAL_PROJECT/GA/genetic_algorithm.hpp
+GeneticAlgorithmBool.hpp
+/mnt/c/Users/George Le/Documents/GitHub/Teaching/AI_project/FINAL_PROJECT/GA/GeneticAlgorithmBool.hpp
+
+/mnt/c/Users/George Le/Documents/GitHub/Teaching/AI_project/FINAL_PROJECT/GA/GeneticAlgorithmBool.hpp
+map
+-
+memory
+-
+vector
+-
+Search_Algorithms/Result.hpp
+/mnt/c/Users/George Le/Documents/GitHub/Teaching/AI_project/FINAL_PROJECT/GA/Search_Algorithms/Result.hpp
+Search_Algorithms/ProblemScore.hpp
+/mnt/c/Users/George Le/Documents/GitHub/Teaching/AI_project/FINAL_PROJECT/GA/Search_Algorithms/ProblemScore.hpp
+expected_data.hpp
+/mnt/c/Users/George Le/Documents/GitHub/Teaching/AI_project/FINAL_PROJECT/GA/expected_data.hpp
+
+/mnt/c/Users/George Le/Documents/GitHub/Teaching/AI_project/FINAL_PROJECT/GA/expected_data.hpp
+iostream
+-
+map
+-
+memory
+-
+string
+-
+utility
+-
+vector
+-
 
 /mnt/c/Users/George Le/Documents/GitHub/Teaching/AI_project/FINAL_PROJECT/Search_Algorithms/Edge.cpp
 Edge.hpp
@@ -33,9 +61,9 @@ Graph.hpp
 /mnt/c/Users/George Le/Documents/GitHub/Teaching/AI_project/FINAL_PROJECT/Search_Algorithms/Graph.hpp
 
 /mnt/c/Users/George Le/Documents/GitHub/Teaching/AI_project/FINAL_PROJECT/Search_Algorithms/Graph.hpp
-map
+deque
 -
-vector
+map
 -
 utility
 -

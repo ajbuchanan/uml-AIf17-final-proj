@@ -3,6 +3,8 @@
 
 CMakeFiles/AI_PROJECT.dir/GA/GeneticAlgorithmBool.cpp.o
  /mnt/c/Users/George Le/Documents/GitHub/Teaching/AI_project/FINAL_PROJECT/GA/GeneticAlgorithmBool.cpp
+ /mnt/c/Users/George Le/Documents/GitHub/Teaching/AI_project/FINAL_PROJECT/GA/GeneticAlgorithmBool.hpp
+ /mnt/c/Users/George Le/Documents/GitHub/Teaching/AI_project/FINAL_PROJECT/GA/expected_data.hpp
 CMakeFiles/AI_PROJECT.dir/Search_Algorithms/Edge.cpp.o
  /mnt/c/Users/George Le/Documents/GitHub/Teaching/AI_project/FINAL_PROJECT/Search_Algorithms/Edge.cpp
  /mnt/c/Users/George Le/Documents/GitHub/Teaching/AI_project/FINAL_PROJECT/Search_Algorithms/Edge.hpp
