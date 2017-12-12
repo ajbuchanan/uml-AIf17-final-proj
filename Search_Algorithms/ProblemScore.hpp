@@ -10,7 +10,7 @@ class ProblemScore
 {
 private:
     std::vector<Result>         mProblemResults;
-    std::map<SearchType,int>    mScores;
+    std::vector<int>            mScores;
 
     void                        GenerateScores();
 
@@ -24,7 +24,7 @@ public:
     int                         getHillScore();
     int                         getUCSScore();
     std::vector<Result>         getResults();
-    std::map<SearchType,int>    getScores();
+    std::vector<int>            getScores();
 };
 
 #endif // PROBLEM_SCORE_HPP

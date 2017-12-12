@@ -39,9 +39,9 @@ std::deque<Node*> Graph::getSuccessors(Node* parent)
 {
     std::deque<Node*> successors;
 
-    for(int i = 0; i < mNodes[parent].size(); i++)
+    for(int i = 0; i < mEdges[parent].size(); i++)
     {
-        successors.push_front(mNodes[parent][i]);
+        successors.push_front(mEdges[parent].at(i)->getTo());
     }
 
     return successors;

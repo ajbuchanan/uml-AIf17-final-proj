@@ -16,9 +16,11 @@
 class ExpectedData
 {
     public:
-    ExpectedData(std::vector<std::string> problems, std::vector<Node*> solution, std::vector<std::string> problem_labels)
+    ExpectedData() { }
+
+    void add_data(std::vector<std::string> problems, std::vector<std::deque<Node*>> solutions, std::vector<std::string> problem_labels)
     {
-        if((problems.size() != solution.size()) && (solution.size() != problem_labels.size()))
+        if((problems.size() != solutions.size()) && (solutions.size() != problem_labels.size()))
         {
             std::cout << "Error: vectors provided into ExpectedData class are not of the same size\n";
             return;
@@ -26,10 +28,10 @@ class ExpectedData
 
         for(int i = 0; i < problems.size(); ++i)
         {
-            m_stored_data.emplace(problems.at(i), make_pair(solution.at(i), problem_labels.at(i)));
+            m_stored_data.emplace(problems.at(i), make_pair(solutions.at(i), problem_labels.at(i)));
         }
     }
-    
+
     // accessor function
     std::vector<Node*> get_solution(std::string problem) const { return m_stored_data.at(problem).first; }
     std::string get_problem_label(std::string problem) const { return m_stored_data.at(problem).second; }
@@ -42,7 +44,7 @@ class ExpectedData
     // whose names are tracked as strings and are stored and mapped
     // to the true solution to the problems storing the ids for the 
     // various nodes that comprise the solution to the problems. 
-    std::map<std::string, std::pair<std::vector<Node*>, std::string>> m_stored_data;
+    std::map<std::string, std::pair<std::deque<Node*>, std::string>> m_stored_data;
 };
 
 #endif // EXPECTED_DATA_HPP

@@ -1,15 +1,14 @@
+#include <climits> // INT_MAX
 #include "ProblemScore.hpp"
 
 ProblemScore::ProblemScore(std::vector<Result> results)
 {
     mProblemResults = results;
 
-    mScores[AStar] = 0;
-    mScores[Beam] = 0;
-    mScores[BFS] = 0;
-    mScores[DFS] = 0;
-    mScores[Hill] = 0;
-    mScores[UCS] = 0;
+    for(int i = 0; i < LAST_SEARCH_TYPE; i++)
+    {
+        mScores.push_back(0);
+    }
 
     GenerateScores();
 }
@@ -49,7 +48,7 @@ std::vector<Result> ProblemScore::getResults()
     return mProblemResults;
 }
 
-std::map<SearchType,int> ProblemScore::getScores()
+std::vector<int> ProblemScore::getScores()
 {
     return mScores;
 }

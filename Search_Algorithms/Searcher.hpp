@@ -8,7 +8,6 @@
 #include <string>
 
 #include "ProblemScore.hpp"
-#include "Node.hpp"
 #include "Result.hpp"
 #include "Graph.hpp"
 
@@ -54,7 +53,6 @@ private:
     void                    GeneratePath(std::map<Node*,Node*>,Node*);
     Result                  GenerateResults(bool,SearchType);
     void                    GenerateGraph(std::string file);
-    bool                    BeamEval(Node*,Node*);
     int                     HillClimbingEval(Node*);
     bool                    IsGoal(Node* node);
     void                    CleanUp();
@@ -79,5 +77,7 @@ public:
     //utility functions
     void                    Print();
 };
+
+bool BeamEval(Node*,Node*);
 
 #endif

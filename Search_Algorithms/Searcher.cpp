@@ -79,9 +79,6 @@ void Searcher::GenerateGraph(std::string file)
     }
 
     int numLooked = 0;
-    int totalNodes = BOARDSIZE * BOARDSIZE;
-    int currentCol = mStartCol;
-    int currentRow = mStartRow;
     Node* prevNode = new Node(mStartRow, mStartCol, 0, ManhattanDistance(mStartRow, mStartCol));
 
     std::deque<std::pair<Node*,Node*> > graphQueue;
@@ -147,7 +144,7 @@ Result Searcher::DepthFirstSearch()
         
         DFSPath[currentNode] = prevNode;
 
-        std::vector<Node*> successors = mGraph.getSuccessors(currentNode);
+        std::deque<Node*> successors = mGraph.getSuccessors(currentNode);
         mNumExpanded++;
 
         mVisited.push_back(currentNode);
@@ -186,7 +183,7 @@ Result Searcher::BreadthFirstSearch()
         
         BFSPath[currentNode] = prevNode;
 
-        std::vector<Node*> successors = mGraph.getSuccessors(currentNode);
+        std::deque<Node*> successors = mGraph.getSuccessors(currentNode);
         mNumExpanded++;
 
         mVisited.push_back(currentNode);
@@ -242,7 +239,7 @@ Result Searcher::AStarSearch()
 
         mVisited.push_back(currentNode);
 
-        std::vector<Node*> successors = mGraph.getSuccessors(currentNode);
+        std::deque<Node*> successors = mGraph.getSuccessors(currentNode);
         mNumExpanded++;
 
         for(int i = 0; i < successors.size(); i++)
@@ -308,7 +305,7 @@ Result Searcher::UniformCostSearch()
 
         mVisited.push_back(currentNode);
 
-        std::vector<Node*> successors = mGraph.getSuccessors(currentNode);
+        std::deque<Node*> successors = mGraph.getSuccessors(currentNode);
         mNumExpanded++;
 
         for(int i = 0; i < successors.size(); i++)
@@ -355,7 +352,7 @@ Result Searcher::HillClimbingSearch()
     {
         mNumMoves++;
 
-        std::vector<Node*> children = mGraph.getSuccessors(currentNode);
+        std::deque<Node*> children = mGraph.getSuccessors(currentNode);
         mNumExpanded++;
 
         mMaxQueue += children.size() - 1;
@@ -412,7 +409,7 @@ Result Searcher::BeamSearch()
         currentNode = mFrontier.front();
         mFrontier.pop_front();
 
-        std::vector<Node*> children = mGraph.getSuccessors(currentNode);
+        std::deque<Node*> children = mGraph.getSuccessors(currentNode);
         mNumExpanded++;
 
         for(int i  = 0; i < children.size(); i++)
@@ -442,7 +439,7 @@ Result Searcher::BeamSearch()
     return GenerateResults(IsGoal(currentNode), Beam);
 }
 
-bool Searcher::BeamEval(Node* a, Node* b)
+bool BeamEval(Node* a, Node* b)
 {
     return (a->getCost() < b->getCost());
 }

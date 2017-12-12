@@ -9,8 +9,6 @@
 /mnt/c/Users/George Le/Documents/GitHub/Teaching/AI_project/FINAL_PROJECT/Build/driver.cpp
 iostream
 -
-vector
--
 
 /mnt/c/Users/George Le/Documents/GitHub/Teaching/AI_project/FINAL_PROJECT/GA/GeneticAlgorithmBool.cpp
 algorithm
@@ -49,6 +47,8 @@ utility
 -
 vector
 -
+Search_Algorithm/Node.hpp
+/mnt/c/Users/George Le/Documents/GitHub/Teaching/AI_project/FINAL_PROJECT/GA/Search_Algorithm/Node.hpp
 
 /mnt/c/Users/George Le/Documents/GitHub/Teaching/AI_project/FINAL_PROJECT/Search_Algorithms/Edge.cpp
 Edge.hpp
@@ -81,6 +81,8 @@ Node.hpp
 /mnt/c/Users/George Le/Documents/GitHub/Teaching/AI_project/FINAL_PROJECT/Search_Algorithms/Node.hpp
 
 /mnt/c/Users/George Le/Documents/GitHub/Teaching/AI_project/FINAL_PROJECT/Search_Algorithms/ProblemScore.cpp
+climits
+-
 ProblemScore.hpp
 /mnt/c/Users/George Le/Documents/GitHub/Teaching/AI_project/FINAL_PROJECT/Search_Algorithms/ProblemScore.hpp
 
@@ -131,8 +133,6 @@ string
 -
 ProblemScore.hpp
 /mnt/c/Users/George Le/Documents/GitHub/Teaching/AI_project/FINAL_PROJECT/Search_Algorithms/ProblemScore.hpp
-Node.hpp
-/mnt/c/Users/George Le/Documents/GitHub/Teaching/AI_project/FINAL_PROJECT/Search_Algorithms/Node.hpp
 Result.hpp
 /mnt/c/Users/George Le/Documents/GitHub/Teaching/AI_project/FINAL_PROJECT/Search_Algorithms/Result.hpp
 Graph.hpp

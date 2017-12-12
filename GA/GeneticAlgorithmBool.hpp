@@ -28,6 +28,8 @@ class GeneticAlgorithmBool
 
     void add_problem(const std::string& filename) { m_current_problem.push_back(filename); }
 
+    void set_repetitions(unsigned int repetitions) { m_repetitions = repetitions; }
+
     /*----------------------------------------------------------------
         User calls this function which will return the ExpectedData 
         that the genetic algorithm 
@@ -38,7 +40,8 @@ class GeneticAlgorithmBool
     // The constructor of the genetic algorithm is private because the class
     // is a singleton.
     GeneticAlgorithmBool(unsigned int number_of_traits, unsigned int size_of_initial_population, unsigned int number_of_generation)
-        : m_number_of_traits(number_of_traits), m_size_of_population(size_of_initial_population), m_number_of_generations(size_of_initial_population), m_current_generation(0) { }
+        : m_number_of_traits(number_of_traits), m_size_of_population(size_of_initial_population), m_number_of_generations(size_of_initial_population), m_current_generation(0)
+            m_repetitions(100) { }
 
     /*-----------------------------------------------------------------
         This function generates pseudo-random sequences for each of the
@@ -75,6 +78,7 @@ class GeneticAlgorithmBool
     unsigned int m_size_of_population;
     unsigned int m_number_of_generations;
     unsigned int m_current_generation;
+    unsigned int m_repetitions;
 };
 
 #endif // GENETIC_ALGORITHM_HPP

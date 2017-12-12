@@ -31,16 +31,24 @@ int return_rand_index(int smallest_index, int greatest_index)
 
 ExpectedData GeneticAlgorithmBool::generate_expected_data()
 {
-    for(unsigned int i = 0; i < m_current_problem.size(); ++i)
-        Searcher searches(m_current_problem.at(i));
-        ProblemScore scores(searches.SearchAll);
+    for(unsigned int i = 0; i < m_repetitions; ++i)
+    {
+        for(unsigned int i = 0; i < m_current_problem.size(); ++i)
+        {
+            Searcher searches(m_current_problem.at(i));
+            ProblemScore scores(searches.SearchAll());
 
-        generate_random_population();
+            generate_random_population();
 
-        for(unsigned int i = 1; i < m_number_of_generations; ++i)
-        {   
-            fitness_function(scores);
+            for(unsigned int i = 1; i < m_number_of_generations; ++i)
+            {   
+                fitness_function(scores);
+                crossover();
+            }
         }
+    }
+
+    return ExpectedData(m_current_problem, scores.getResults())
 }
 
 void GeneticAlgorithmBool::generate_random_population()
@@ -69,7 +77,7 @@ void GeneticAlgorithmBool::generate_random_population()
     
 void GeneticAlgorithmBool::fitness_function(const ProblemScore& scores)
 {
-    double highest_score = 0.0, index_of_highest_scores = 0.0, current_score = 0.0;
+    std::vector<double> average_scores = {m_size_of_population , 0.0};
 
     for(unsigned int index = 0; index < m_size_of_population; ++index)
     {
@@ -77,8 +85,21 @@ void GeneticAlgorithmBool::fitness_function(const ProblemScore& scores)
         {
             if(m_generations.at(m_current_generation).at(index).at(i))
             {
-                current_score = ;
+                average_scores.at(index) += (double)scores.getScores().at(i);
             }
+            average_scores.at(index) / (double)m_number_of_traits;
+        }
+    }
+
+    std::sort(average_scores.begin(), average_scores.end());
+
+    double median = average_scores.at(average_scores.size() / 2);
+
+    for(unsigned int index = 0; index < m_size_of_population; ++index)
+    {
+        if(average_scores.at(index) >= median)
+        {
+            m_fittest_population.push_back(m_generations.at(m_current_generation).at(index));
         }
     }
 }
