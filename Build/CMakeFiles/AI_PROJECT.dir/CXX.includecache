@@ -9,12 +9,12 @@
 /mnt/c/Users/George Le/Documents/GitHub/Teaching/AI_project/FINAL_PROJECT/Build/driver.cpp
 iostream
 -
-ANN/FeedForwardANN.hpp
-/mnt/c/Users/George Le/Documents/GitHub/Teaching/AI_project/FINAL_PROJECT/Build/ANN/FeedForwardANN.hpp
-GA/GeneticAlgorithmBool.hpp
-/mnt/c/Users/George Le/Documents/GitHub/Teaching/AI_project/FINAL_PROJECT/Build/GA/GeneticAlgorithmBool.hpp
+vector
+-
 
 /mnt/c/Users/George Le/Documents/GitHub/Teaching/AI_project/FINAL_PROJECT/GA/GeneticAlgorithmBool.cpp
+algorithm
+-
 random
 -
 GeneticAlgorithmBool.hpp
@@ -31,6 +31,8 @@ Search_Algorithms/Result.hpp
 /mnt/c/Users/George Le/Documents/GitHub/Teaching/AI_project/FINAL_PROJECT/GA/Search_Algorithms/Result.hpp
 Search_Algorithms/ProblemScore.hpp
 /mnt/c/Users/George Le/Documents/GitHub/Teaching/AI_project/FINAL_PROJECT/GA/Search_Algorithms/ProblemScore.hpp
+Search_Algorithms/Searcher.hpp
+/mnt/c/Users/George Le/Documents/GitHub/Teaching/AI_project/FINAL_PROJECT/GA/Search_Algorithms/Searcher.hpp
 expected_data.hpp
 /mnt/c/Users/George Le/Documents/GitHub/Teaching/AI_project/FINAL_PROJECT/GA/expected_data.hpp
 
@@ -127,6 +129,8 @@ math.h
 -
 string
 -
+ProblemScore.hpp
+/mnt/c/Users/George Le/Documents/GitHub/Teaching/AI_project/FINAL_PROJECT/Search_Algorithms/ProblemScore.hpp
 Node.hpp
 /mnt/c/Users/George Le/Documents/GitHub/Teaching/AI_project/FINAL_PROJECT/Search_Algorithms/Node.hpp
 Result.hpp

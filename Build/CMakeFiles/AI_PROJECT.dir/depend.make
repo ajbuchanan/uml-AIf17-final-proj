@@ -29,6 +29,7 @@ CMakeFiles/AI_PROJECT.dir/Search_Algorithms/Result.cpp.o: ../Search_Algorithms/R
 CMakeFiles/AI_PROJECT.dir/Search_Algorithms/Searcher.cpp.o: ../Search_Algorithms/Edge.hpp
 CMakeFiles/AI_PROJECT.dir/Search_Algorithms/Searcher.cpp.o: ../Search_Algorithms/Graph.hpp
 CMakeFiles/AI_PROJECT.dir/Search_Algorithms/Searcher.cpp.o: ../Search_Algorithms/Node.hpp
+CMakeFiles/AI_PROJECT.dir/Search_Algorithms/Searcher.cpp.o: ../Search_Algorithms/ProblemScore.hpp
 CMakeFiles/AI_PROJECT.dir/Search_Algorithms/Searcher.cpp.o: ../Search_Algorithms/Result.hpp
 CMakeFiles/AI_PROJECT.dir/Search_Algorithms/Searcher.cpp.o: ../Search_Algorithms/Searcher.cpp
 CMakeFiles/AI_PROJECT.dir/Search_Algorithms/Searcher.cpp.o: ../Search_Algorithms/Searcher.hpp

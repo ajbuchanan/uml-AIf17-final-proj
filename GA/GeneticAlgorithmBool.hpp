@@ -10,6 +10,7 @@
 
 #include "Search_Algorithms/Result.hpp"
 #include "Search_Algorithms/ProblemScore.hpp"
+#include "Search_Algorithms/Searcher.hpp"
 #include "expected_data.hpp"
 
 class GeneticAlgorithmBool
@@ -25,17 +26,19 @@ class GeneticAlgorithmBool
         return instance;
     }
 
+    void add_problem(const std::string& filename) { m_current_problem.push_back(filename); }
+
     /*----------------------------------------------------------------
-        User calls this function which will return the fittest member 
-        of the last generation of the genetic algorithm.
+        User calls this function which will return the ExpectedData 
+        that the genetic algorithm 
     ----------------------------------------------------------------*/
-    std::vector<bool> get_fittest_pop() const { return m_fittest_population; }
+    ExpectedData generate_expected_data();
 
     private:
     // The constructor of the genetic algorithm is private because the class
     // is a singleton.
-    GeneticAlgorithmBool(unsigned int number_of_traits, unsigned int size_of_initial_population, unsigned int number_of_generations)
-        : m_number_of_traits(number_of_traits), m_size_of_population(size_of_initial_population), m_number_of_generations(size_of_initial_population) { }
+    GeneticAlgorithmBool(unsigned int number_of_traits, unsigned int size_of_initial_population, unsigned int number_of_generation)
+        : m_number_of_traits(number_of_traits), m_size_of_population(size_of_initial_population), m_number_of_generations(size_of_initial_population), m_current_generation(0) { }
 
     /*-----------------------------------------------------------------
         This function generates pseudo-random sequences for each of the
@@ -50,25 +53,28 @@ class GeneticAlgorithmBool
         fittest member of the generation which will survive and 
         reproduce for the next generation. 
     -----------------------------------------------------------------*/
-    void fitness_function();
+    void fitness_function(const ProblemScore& scores);
     
     /*-----------------------------------------------------------------
-        TBD
+        Performs two point crossover on the parent organism strings.
     -----------------------------------------------------------------*/
     void crossover();
 
-    /*-----------------------------------------------------------------
-        TBD
-    -----------------------------------------------------------------*/
-    void mutation();
+    /*--------------------------------------------------------------------
+        Performs a bit string mutation on the child of the new generation.
+    --------------------------------------------------------------------*/
+    void mutation(std::vector<bool> child);
 
-    std::map<int, std::vector<bool>> m_generation;
+    std::map<int, std::vector<std::vector<bool>>> m_generations;
 
-    std::vector<bool> m_fittest_population;
+    std::vector<std::vector<bool>> m_fittest_population;
+
+    std::vector<std::string> m_current_problem;
 
     unsigned int m_number_of_traits;
     unsigned int m_size_of_population;
     unsigned int m_number_of_generations;
+    unsigned int m_current_generation;
 };
 
 #endif // GENETIC_ALGORITHM_HPP
