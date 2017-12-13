@@ -11,34 +11,36 @@ elseif(WIN32)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /std:c++11 /MP /Wall")
 endif()
 
-set(GA
-    GA/expected_data.hpp
-    GA/GeneticAlgorithmBool.cpp
-    GA/GeneticAlgorithmBool.hpp
-    Build/driver.cpp
+set(SRC
+    build/driver.cpp
+    src/GA/GeneticAlgorithmBool.cpp
+    src/Search_Algorithms/Edge.cpp
+    src/Search_Algorithms/Graph.cpp
+    src/Search_Algorithms/Node.cpp
+    src/Search_Algorithms/ProblemScore.cpp
+    src/Search_Algorithms/Result.cpp
+    src/Search_Algorithms/Searcher.cpp
 )
 
-set(SEARCH_ALGORITHMS
-    Search_Algorithms/Edge.cpp
-    Search_Algorithms/Edge.hpp
-    Search_Algorithms/Graph.cpp
-    Search_Algorithms/Graph.hpp
-    Search_Algorithms/Node.cpp
-    Search_Algorithms/Node.hpp
-    Search_Algorithms/ProblemScore.cpp
-    Search_Algorithms/ProblemScore.hpp
-    Search_Algorithms/Result.cpp
-    Search_Algorithms/Result.hpp
-    Search_Algorithms/Searcher.cpp
-    Search_Algorithms/Searcher.hpp
+set(INCLUDES
+    include/GA/expected_data.hpp
+    include/GA/GeneticAlgorithmBool.hpp
+    include/Search_Algorithms/Edge.hpp
+    include/Search_Algorithms/Graph.hpp
+    include/Search_Algorithms/Node.hpp
+    include/Search_Algorithms/ProblemScore.hpp
+    include/Search_Algorithms/Result.hpp
+    include/Search_Algorithms/Searcher.hpp
 )
+
+include_directories(include)
 
 add_executable(${PROJECT_NAME}
-    ${SEARCH_ALGORITHMS}
-    ${GA}
+    ${SRC}
+    ${INCLUDES}
 )
 
-set(TEST_PROBLEM_DATA
+set(PROJECT_DATA
     TestProblems/prob1.map
     TestProblems/prob2.map
     TestProblems/prob3.map
@@ -68,7 +70,7 @@ set(TEST_PROBLEM_DATA
     TestProblems/prob27.map
     TestProblems/prob28.map
     TestProblems/prob29.map
-    TestProblems/prob20.map
+    TestProblems/prob30.map
 )
 
 foreach(DATA ${PROJECT_DATA})
